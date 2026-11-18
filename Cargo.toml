@@ -1,0 +1,105 @@
+[package]
+name = "zevrigo-explorer"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "zevrigo-explorer"
+path = "src/main.rs"
+
+[dependencies]
+# DEC-10 bagian 6: API HTTP. Hanya `http1` dan `tokio`; Json, Query, dan fitur bawaan lain tidak dipakai.
+axum = { workspace = true, features = ["http1", "tokio"] }
+# DEC-25 bagian 2: MOD-01, 02, 04, 08. MOD-05 tidak dipakai; MOD-09 (alamat) tidak dipakai lagi sejak DEC-28.
+zevrigo-consensus.workspace = true
+zevrigo-crypto.workspace = true
+zevrigo-primitives.workspace = true
+zevrigo-rpc.workspace = true
+# DEC-10 bagian 6: SQLite 3.54.1 ikut dikompilasi (fitur `bundled`); fitur bawaan rusqlite tidak dipakai.
+# `fallible_uint`: u64 dan usize lewat konversi i64 yang diperiksa (galat jika di luar jangkauan), tanpa paket baru.
+rusqlite = { workspace = true, features = ["bundled", "fallible_uint"] }
+serde_json.workspace = true
+# DEC-10 bagian 4 (TSK-M38): SHA-256 untuk hash skrip inline halaman Next.js di kebijakan keamanan konten (`web`).
+sha2.workspace = true
+thiserror.workspace = true
+tokio = { workspace = true, features = ["rt-multi-thread", "macros", "net", "signal", "time"] }
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[dev-dependencies]
+# FTR-05 (TSK-F05; RENCANA_BERSIH 8, pencipta 18 November 2026): uji ujung ke ujung explorer, dulu di MOD-17 repo inti.
+# Node, miner, mempool, penyimpanan, dan alamat sungguhan dari repo inti, lewat `path` dan hanya untuk uji (DEC-25 bagian 3):
+# program `zevrigo-explorer` tetap hanya memakai MOD-01, 02, 04, 08. Versi paket sama dengan Cargo.lock repo inti.
+zevrigo-mempool = { path = "../zevrigo/crates/mempool" }
+zevrigo-miner = { path = "../zevrigo/apps/miner" }
+zevrigo-node = { path = "../zevrigo/apps/node" }
+zevrigo-storage = { path = "../zevrigo/crates/storage" }
+zevrigo-wallet-core = { path = "../zevrigo/crates/wallet-core" }
+
+[lints]
+workspace = true
+
+# zevrigo_lab (17 November 2026, AGENDA P1): repo sendiri, paket di akar repo sekaligus akar workspace.
+[workspace]
+resolver = "3"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99.0"
+publish = false
+license = "MIT OR Apache-2.0"
+
+[workspace.dependencies]
+# zevrigo_lab (17 November 2026, AGENDA P3): crate inti dari repo `zevrigo` di folder sebelah (`../zevrigo`). Sementara
+# lewat path; diganti dependensi git ke repo inti dengan tag sesudah keputusan git pencipta.
+zevrigo-primitives = { path = "../zevrigo/crates/primitives" }
+zevrigo-crypto = { path = "../zevrigo/crates/crypto" }
+zevrigo-consensus = { path = "../zevrigo/crates/consensus" }
+zevrigo-rpc = { path = "../zevrigo/crates/rpc" }
+thiserror = "2.0.21"
+# DEC-10 bagian 4: hanya MOD-09 wallet-core (BIP39 dan BIP32); `sha2` juga MOD-14 explorer (hash CSP, TSK-M38).
+# Seri digest 0.10, sama dengan k256.
+sha2 = { version = "0.10.9", default-features = false }
+# DEC-10 bagian 2: hanya untuk crate di luar konsensus (network, rpc, aplikasi). Fitur ditambah per crate.
+tokio = { version = "1.54.1", default-features = false }
+serde_json = { version = "1.0.154", default-features = false, features = ["std"] }
+tracing = { version = "0.1.44", default-features = false, features = ["std"] }
+tracing-subscriber = { version = "0.3.23", default-features = false, features = ["std", "fmt"] }
+# DEC-10 bagian 6 (DEC-25): hanya MOD-14 explorer. rusqlite dengan fitur `bundled` mengompilasi SQLite (C).
+# DEC-10 bagian 13 (DEC-36): axum juga di MOD-18 demo (gerbang RPC), fitur sama dengan MOD-14, tanpa paket baru.
+# Fitur bawaan keduanya dimatikan; fitur ditambah di crate saat pemakaian pertama (TSK-M29, TSK-M30).
+axum = { version = "0.8.9", default-features = false }
+rusqlite = { version = "0.41.1", default-features = false }
+
+# DEC-01 (AGENDA P4, WAJIB): explorer memakai MOD-04 consensus -> MOD-03 pow -> randomx-rs. Salinan randomx-rs dengan salt
+# "RandomZVRG\x01" diambil dari repo inti; tanpa patch ini Cargo memakai randomx-rs crates.io (salt resmi RandomX) dan hash
+# PoW testnet/mainnet berbeda dengan node. `make check-randomx` memeriksa sumbernya di Cargo.lock.
+[patch.crates-io]
+randomx-rs = { path = "../zevrigo/vendor/randomx-rs" }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[workspace.lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+todo = "warn"
+dbg_macro = "deny"
+float_arithmetic = "deny"
+float_cmp = "deny"
+float_cmp_const = "deny"
+lossy_float_literal = "deny"
+cast_precision_loss = "deny"
+imprecise_flops = "deny"
+suboptimal_flops = "deny"
+
+# DEC-01: kode C++ RandomX (build script randomx-rs, CMake RelWithDebInfo) dioptimalkan juga di profil dev dan test, agar
+# cache 256 MiB dan hash di test tidak lambat. Tidak mengubah Cargo.lock maupun build rilis.
+[profile.dev.package.randomx-rs]
+opt-level = 3

@@ -1,0 +1,9 @@
+# Hasil build Rust (Cargo.lock sengaja TIDAK diabaikan untuk reproducible build)
+/target/
+# Antarmuka web: lihat web/.gitignore
+
+# Konfigurasi editor lokal
+.vscode/
+.idea/
+*.swp
+*~
