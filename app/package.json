@@ -1,0 +1,10 @@
+{
+  "name": "zevrigo-explorer-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Aplikasi Zevrigo Explorer (TSK-M69). Tanpa paket npm: skrip tauri memakai Tauri CLI 2.12.2 dari repo zevrigo-wallet di folder sebelah (zevrigo_lab), yang juga dipanggil Gradle Android (npm run -- tauri android android-studio-script). Installer Windows memakai npx @tauri-apps/cli@2.12.2.",
+  "license": "MIT OR Apache-2.0",
+  "scripts": {
+    "tauri": "../../zevrigo-wallet/node_modules/.bin/tauri"
+  }
+}

@@ -1,0 +1,60 @@
+# Aplikasi Zevrigo Explorer untuk Windows dan Android (TSK-M69, RENCANA_T11; pencipta 20 November 2026: cara A, jendela ke
+# explorer publik, di repo explorer). Workspace Cargo sendiri dengan Cargo.lock sendiri, terpisah dari program explorer di akar
+# repo: Cargo.lock akar, paket Docker, dan CI explorer tidak berubah. Aturan lint, toolchain (rust-toolchain.toml akar), dan
+# larangan sama dengan repo ini.
+[package]
+name = "zevrigo-explorer-app"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99.0"
+publish = false
+license = "MIT OR Apache-2.0"
+description = "Aplikasi Zevrigo Explorer (Windows dan Android): jendela Tauri 2 ke explorer publik demo regtest"
+
+# Pustaka untuk Android (Tauri mobile memuat cdylib lewat JNI; staticlib untuk iOS nanti), program desktop memanggil pustaka
+# yang sama. Nama berbeda dari program agar berkas hasil build tidak bentrok di Windows (pola MOD-15).
+[lib]
+name = "zevrigo_explorer_app_lib"
+path = "src/lib.rs"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "zevrigo-explorer-app"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build.workspace = true
+
+[dependencies]
+tauri.workspace = true
+
+[lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+todo = "warn"
+dbg_macro = "deny"
+float_arithmetic = "deny"
+float_cmp = "deny"
+float_cmp_const = "deny"
+lossy_float_literal = "deny"
+cast_precision_loss = "deny"
+imprecise_flops = "deny"
+suboptimal_flops = "deny"
+
+# Akar workspace sendiri (tidak ikut workspace program explorer di akar repo).
+[workspace]
+resolver = "3"
+
+# Versi ditulis di workspace dan paket memakai `.workspace = true` (pola wallet MOD-15): Tauri CLI (`tauri build`,
+# `tauri android init/build`) menulis ulang dependensi tauri di [dependencies] (menambah `features = []`), tetapi tidak menyentuh
+# dependensi workspace, sehingga berkas ini tidak berubah saat build (Q171 percobaan 2 berhenti di J6 karena itu).
+[workspace.dependencies]
+# Izin pencipta 20 November 2026 (RENCANA_T11): jendela WebView. Versi dan fitur sama persis dengan wallet MOD-15 (DEC-10
+# bagian 11), tanpa plugin; Cargo.lock aplikasi ini adalah bagian dari Cargo.lock wallet (diperiksa q171_periksa.py lock).
+tauri = { version = "=2.12.3" }
+tauri-build = { version = "=2.7.2" }

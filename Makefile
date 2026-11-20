@@ -1,5 +1,5 @@
 # Zevrigo Explorer (MOD-14). Crate inti dan salinan randomx-rs dari ../zevrigo (AGENDA P3, P4).
-.PHONY: fmt fmt-check lint check-forbidden check-randomx test deps check-all web-check
+.PHONY: fmt fmt-check lint check-forbidden check-randomx test deps check-all web-check app-check
 
 fmt:
 	cargo fmt --all
@@ -30,3 +30,7 @@ check-all: fmt-check lint check-forbidden check-randomx test
 # Antarmuka web (DEC-26): npm ci tanpa skrip pasang, typecheck, test, next build (static export ke web/out).
 web-check:
 	cd web && npm ci --ignore-scripts --no-audit --no-fund && npm run check
+
+# Aplikasi explorer (TSK-M69): workspace Cargo sendiri di app/src-tauri dengan Cargo.lock sendiri (Tauri 2, WebKitGTK di Linux).
+app-check:
+	cd app/src-tauri && cargo fmt -- --check && cargo clippy --locked --all-targets -- -D warnings && bash ../../scripts/check-forbidden.sh && cargo test --locked

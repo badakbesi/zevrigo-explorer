@@ -54,3 +54,4 @@ transaksi, alamat, pasokan, dan alokasi genesis dari node miliknya sendiri.
 - [TSK-M43](../tasks/TSK-M43-explorer-trust-proxy.md) — 🟢 selesai (batas laju per pengunjung di belakang Cloudflare Tunnel, `--trust-proxy`)
 - [TSK-M44](https://github.com/badakbesi/zevrigo-demo/blob/main/docs/tasks/TSK-M44-explorer-publik-tunnel.md) — 🟢 selesai (explorer publik lewat Cloudflare Tunnel, `compose.publik.yaml`)
 - [TSK-M54](https://github.com/badakbesi/zevrigo-demo/blob/main/docs/tasks/TSK-M54-faucet.md) — 🟡 halaman faucet `/faucet/` dan `--faucet-origin` (layanan faucet di MOD-18)
+- [TSK-M69](../tasks/TSK-M69-aplikasi-explorer.md) — 🟡 aplikasi Zevrigo Explorer untuk Windows dan Android (`app/`, Tauri 2, jendela ke explorer publik)

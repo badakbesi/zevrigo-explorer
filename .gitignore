@@ -1,6 +1,11 @@
 # Hasil build Rust (Cargo.lock sengaja TIDAK diabaikan untuk reproducible build)
 /target/
 # Antarmuka web: lihat web/.gitignore
+# Aplikasi explorer (TSK-M69): hasil build Tauri, berkas buatan tauri-build, proyek Android buatan `tauri android init`
+# (dibuat ulang setiap build, diarsip di zevrigo_lab/arsip), dan hasil workflow rilis
+/app/src-tauri/target/
+/app/src-tauri/gen/
+/app/rilis/
 
 # Konfigurasi editor lokal
 .vscode/

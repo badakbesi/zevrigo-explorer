@@ -1,0 +1,54 @@
+ZEVRIGO EXPLORER 0.1 (APLIKASI) - KEBIJAKAN PRIVASI DAN LISENSI
+(English below)
+
+1. Jaringan demo
+Aplikasi ini menampilkan explorer jaringan demo regtest Zevrigo, untuk belajar. Koin di
+jaringan demo tidak bernilai, tidak bisa dijual, dan bisa hilang kapan saja saat jaringan
+di-reset. Ini bukan penawaran investasi.
+
+2. Data
+Aplikasi ini adalah jendela ke explorer resmi https://zevrigo.ratuaurion.store. Aplikasi
+sendiri tidak menyimpan, tidak mengirim analitik atau telemetri, dan tidak membaca berkas,
+kamera, atau data lain di perangkat ini. Halaman explorer tidak punya akses ke perangkat.
+
+Explorer dijalankan pembuat Zevrigo di belakang Cloudflare. Explorer melihat halaman yang
+Anda buka (blok, transaksi) dan alamat IP Anda lewat Cloudflare; explorer tidak memakai
+kuki dan analitik. Halaman faucet mengirim alamat yang Anda isi ke layanan faucet demo.
+Cloudflare memproses lalu lintas menurut kebijakan privasinya sendiri:
+https://www.cloudflare.com/privacypolicy/
+
+Aplikasi hanya membuka halaman di https://zevrigo.ratuaurion.store; tautan ke situs lain
+tidak dibuka.
+
+3. Lisensi
+Dilisensikan dengan MIT atau Apache-2.0, sesuai pilihan Anda.
+Kode sumber: https://github.com/badakbesi/zevrigo-explorer
+Perangkat lunak ini disediakan "apa adanya", tanpa jaminan apa pun.
+
+------------------------------------------------------------------------------------
+
+ZEVRIGO EXPLORER 0.1 (APP) - PRIVACY POLICY AND LICENSE
+
+1. Demo network
+This app shows the explorer of the Zevrigo regtest demo network, for learning. Coins on
+the demo network have no value, cannot be sold, and can disappear at any time when the
+network is reset. This is not an investment offer.
+
+2. Data
+This app is a window to the official explorer https://zevrigo.ratuaurion.store. The app
+itself stores nothing, sends no analytics or telemetry, and does not read files, the
+camera, or other data on this device. The explorer pages have no access to the device.
+
+The explorer is run by the Zevrigo creator behind Cloudflare. It sees the pages you open
+(blocks, transactions) and your IP address through Cloudflare; it uses no cookies and no
+analytics. The faucet page sends the address you enter to the demo faucet service.
+Cloudflare processes traffic under its own privacy policy:
+https://www.cloudflare.com/privacypolicy/
+
+The app only opens pages on https://zevrigo.ratuaurion.store; links to other sites are
+not opened.
+
+3. License
+Licensed under MIT or Apache-2.0, at your option.
+Source code: https://github.com/badakbesi/zevrigo-explorer
+This software is provided "as is", without warranty of any kind.

@@ -20,4 +20,12 @@ Spesifikasi: [docs/reference/spesifikasi-explorer-v0.1.md](docs/reference/spesif
 Favicon dan ikon situs (`web/app/favicon.ico`, `icon.png`, `apple-icon.png`) adalah salinan logo resmi dari `merek/` repo
 inti ([SUMBER_RESMI.md](https://github.com/badakbesi/zevrigo/blob/main/SUMBER_RESMI.md), DEC-40); jangan diganti di repo ini.
 
+## Aplikasi Zevrigo Explorer (Windows dan Android)
+
+`app/` berisi aplikasi Tauri 2 yang membuka explorer publik https://zevrigo.ratuaurion.store di jendelanya sendiri (TSK-M69):
+tanpa perintah IPC, hanya halaman di origin explorer yang dibuka. Workspace Cargo sendiri (`app/src-tauri/Cargo.lock`), jadi
+program explorer, Docker, dan CI di atas tidak berubah. `make app-check` (Linux butuh WebKitGTK 4.1 seperti wallet). Installer
+Windows: workflow `Rilis aplikasi explorer` (tag `explorer-app-v<versi>`). APK Android: skrip langkah pencipta di zevrigo_lab (`app/package.json` hanya skrip `tauri` ke Tauri CLI repo
+zevrigo-wallet di folder sebelah, tanpa paket npm).
+
 Lisensi: MIT OR Apache-2.0 (DEC-02).
