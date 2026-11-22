@@ -374,7 +374,7 @@ fn http_server_allows_faucet_origin_only_for_web_pages() {
         "<!DOCTYPE html><script>self.__next_f=[]</script>",
     )
     .unwrap();
-    let origin = "https://zevrigo-faucet.ratuaurion.store";
+    let origin = "https://demo-faucet.zevrigo.online";
     let index = Indexer::open_in_memory(regtest_network_id().unwrap()).unwrap();
     let shared = Arc::new(Shared::new(index, Network::Regtest));
     let listener = rt

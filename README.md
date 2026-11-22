@@ -2,7 +2,7 @@
 
 Indexer SQLite, API JSON baca saja (`/api/v1/`), dan antarmuka web explorer Zevrigo Coin (Next.js + Tailwind CSS + shadcn/ui,
 dua bahasa, tanpa kuki dan analitik). Explorer hanya menyajikan data sistem (DEC-28). Explorer publik demo regtest:
-https://zevrigo.ratuaurion.store
+https://demo-explorer.zevrigo.online
 
 Repo ini bagian dari **zevrigo_lab**: crate inti dan salinan RandomX (salt `RandomZVRG\x01`, DEC-01) dari repo inti `zevrigo`
 di folder sebelah (`../zevrigo`). Aturan proyek: [AGENTS.md](AGENTS.md).

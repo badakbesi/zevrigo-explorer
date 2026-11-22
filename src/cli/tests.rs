@@ -302,7 +302,7 @@ fn parses_faucet_origin() {
         ]))
     };
     for origin in [
-        "https://zevrigo-faucet.ratuaurion.store",
+        "https://demo-faucet.zevrigo.online",
         "http://127.0.0.1:28805",
         "http://node-faucet:28805",
     ] {
@@ -312,7 +312,7 @@ fn parses_faucet_origin() {
         assert_eq!(config.faucet_origin.as_deref(), Some(origin));
     }
     for origin in [
-        "zevrigo-faucet.ratuaurion.store",
+        "demo-faucet.zevrigo.online",
         "https://",
         "https://a.example/",
         "https://a.example/api",

@@ -101,7 +101,7 @@ pub enum ArgError {
     #[error("batas laju API tidak sah: {0}")]
     InvalidRate(String),
     /// `--faucet-origin` bukan origin `http(s)://nama[:port]`.
-    #[error("origin faucet tidak sah (contoh: https://zevrigo-faucet.ratuaurion.store): {0}")]
+    #[error("origin faucet tidak sah (contoh: https://demo-faucet.zevrigo.online): {0}")]
     InvalidOrigin(String),
     /// Jaringan belum tersedia.
     #[error("jaringan {0} belum tersedia (mainnet diluncurkan sesudah testnet)")]
