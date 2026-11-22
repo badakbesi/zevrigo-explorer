@@ -22,6 +22,10 @@ export type FaucetStatus = {
   synced: boolean;
   ready: boolean;
   resets_at_utc: string;
+  /** Kiriman paling banyak per pengunjung dalam jendela 24 jam (TSK-M72). */
+  visitor_limit?: number;
+  /** Panjang jendela batas alamat dan pengunjung, detik (TSK-M72: 86400). */
+  claim_window_seconds?: number;
 };
 
 export type FaucetPayout = {
@@ -155,6 +159,8 @@ const MOCK_STATUS: FaucetStatus = {
   synced: true,
   ready: true,
   resets_at_utc: '00:00',
+  visitor_limit: 5,
+  claim_window_seconds: 86400,
 };
 
 /** Keadaan faucet (`GET`). */

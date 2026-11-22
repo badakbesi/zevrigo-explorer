@@ -26,7 +26,7 @@ function SheetContent({
       <SheetPrimitive.Content
         data-slot="sheet-content"
         className={cn(
-          'fixed inset-y-0 right-0 z-50 flex h-full w-72 max-w-[85vw] flex-col border-l border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 text-slate-900 dark:text-slate-100 shadow-xl focus:outline-none',
+          'fixed inset-y-0 right-0 z-50 flex h-full w-72 max-w-[85vw] flex-col border-l border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 pt-[calc(1.25rem_+_env(safe-area-inset-top))] pb-[calc(1.25rem_+_env(safe-area-inset-bottom))] text-slate-900 dark:text-slate-100 shadow-xl focus:outline-none',
           className
         )}
         {...props}

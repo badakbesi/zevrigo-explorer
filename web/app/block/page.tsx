@@ -268,7 +268,7 @@ function BlockDetailContent() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-20">#</TableHead>
+              <TableHead className="w-10 sm:w-20">#</TableHead>
               <TableHead>{t('colTxid')}</TableHead>
               <TableHead className="text-right">Role</TableHead>
             </TableRow>
@@ -283,8 +283,17 @@ function BlockDetailContent() {
                   <HashValue
                     value={txid}
                     href={routes.tx(txid)}
+                    startChars={10}
+                    endChars={8}
+                    label="txid"
+                    className="sm:hidden"
+                  />
+                  <HashValue
+                    value={txid}
+                    href={routes.tx(txid)}
                     truncate={false}
                     label="txid"
+                    className="hidden sm:inline-flex"
                   />
                 </TableCell>
                 <TableCell className="text-right">

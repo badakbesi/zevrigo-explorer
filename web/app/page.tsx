@@ -29,7 +29,6 @@ import {
   MINING_SUPPLY_QUANTA,
 } from '@/lib/amount';
 import { routes } from '@/lib/route';
-import { formatRelativeTime, formatUtcTimestamp } from '@/lib/time';
 import {
   Alert,
   Button,
@@ -41,16 +40,10 @@ import {
   Input,
   Progress,
   Skeleton,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
 } from '@/components/ui/primitives';
 import {
   ApiStateView,
-  ConfirmationsBadge,
+  BlockRowsView,
   HashValue,
   ZvrgAmount,
   RecentBlocksCharts,
@@ -158,10 +151,10 @@ export default function DashboardPage() {
       {failure && !data && <ApiStateView failure={failure} onRetry={reload} />}
 
       {/* 8 Stat Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-3.5">
         {/* 1. Indexed Height */}
         <Card>
-          <CardContent className="p-4 space-y-1">
+          <CardContent className="p-3 sm:p-4 space-y-1">
             <div className="text-xs text-slate-500 dark:text-slate-400">
               {t('statIndexedHeight')}
             </div>
@@ -192,7 +185,7 @@ export default function DashboardPage() {
 
         {/* 2. Node Height & Sync State */}
         <Card>
-          <CardContent className="p-4 space-y-1">
+          <CardContent className="p-3 sm:p-4 space-y-1">
             <div className="text-xs text-slate-500 dark:text-slate-400">
               {t('statNodeHeight')}
             </div>
@@ -225,7 +218,7 @@ export default function DashboardPage() {
 
         {/* 3. Mempool Transactions */}
         <Card>
-          <CardContent className="p-4 space-y-1">
+          <CardContent className="p-3 sm:p-4 space-y-1">
             <div className="text-xs text-slate-500 dark:text-slate-400">
               {t('statMempoolTxs')}
             </div>
@@ -249,7 +242,7 @@ export default function DashboardPage() {
 
         {/* 4. Average Block Time */}
         <Card>
-          <CardContent className="p-4 space-y-1">
+          <CardContent className="p-3 sm:p-4 space-y-1">
             <div className="text-xs text-slate-500 dark:text-slate-400">
               {t('statAvgBlockTime')}
             </div>
@@ -271,7 +264,7 @@ export default function DashboardPage() {
 
         {/* 5. Mined Supply */}
         <Card>
-          <CardContent className="p-4 space-y-1">
+          <CardContent className="p-3 sm:p-4 space-y-1">
             <div className="text-xs text-slate-500 dark:text-slate-400">
               {t('statMinedSupply')}
             </div>
@@ -294,7 +287,7 @@ export default function DashboardPage() {
 
         {/* 6. Cumulative Fees */}
         <Card>
-          <CardContent className="p-4 space-y-1">
+          <CardContent className="p-3 sm:p-4 space-y-1">
             <div className="text-xs text-slate-500 dark:text-slate-400">
               {t('supplyCumulativeFees')}
             </div>
@@ -322,7 +315,7 @@ export default function DashboardPage() {
 
         {/* 7. Next Block Subsidy */}
         <Card>
-          <CardContent className="p-4 space-y-1">
+          <CardContent className="p-3 sm:p-4 space-y-1">
             <div className="text-xs text-slate-500 dark:text-slate-400">
               {t('statNextSubsidy')}
             </div>
@@ -345,7 +338,7 @@ export default function DashboardPage() {
 
         {/* 8. Chain Tip Target */}
         <Card>
-          <CardContent className="p-4 space-y-1">
+          <CardContent className="p-3 sm:p-4 space-y-1">
             <div className="text-xs text-slate-500 dark:text-slate-400">
               {t('statTipTarget')}
             </div>
@@ -429,58 +422,7 @@ export default function DashboardPage() {
         {isLoading && blocks.length === 0 ? (
           <TableSkeleton rows={8} />
         ) : (
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>{t('colHeight')}</TableHead>
-                <TableHead>{t('colBlockId')}</TableHead>
-                <TableHead>{t('colTime')}</TableHead>
-                <TableHead className="text-right">{t('colTxs')}</TableHead>
-                <TableHead className="text-right">{t('colSize')}</TableHead>
-                <TableHead className="text-right">{t('colStatus')}</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {blocks.map((b) => (
-                <TableRow key={b.block_id}>
-                  <TableCell className="font-mono font-semibold tabular-nums">
-                    <Link
-                      href={routes.block(b.height)}
-                      className="text-teal-700 dark:text-teal-400 hover:underline"
-                    >
-                      #{formatInt(b.height, lang)}
-                    </Link>
-                  </TableCell>
-                  <TableCell>
-                    <HashValue
-                      value={b.block_id}
-                      href={routes.block(b.block_id)}
-                      startChars={10}
-                      endChars={8}
-                      label="block_id"
-                    />
-                  </TableCell>
-                  <TableCell className="whitespace-nowrap">
-                    <div className="font-mono text-xs tabular-nums text-slate-800 dark:text-slate-200">
-                      {formatUtcTimestamp(b.timestamp)}
-                    </div>
-                    <div className="text-[11px] text-slate-500 dark:text-slate-400">
-                      {formatRelativeTime(b.timestamp, nowUnix, lang)}
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-right font-mono tabular-nums">
-                    {formatInt(b.tx_count, lang)}
-                  </TableCell>
-                  <TableCell className="text-right font-mono tabular-nums">
-                    {formatInt(b.size, lang)}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <ConfirmationsBadge confirmations={b.confirmations} />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <BlockRowsView blocks={blocks} nowUnix={nowUnix} />
         )}
       </Card>
     </div>

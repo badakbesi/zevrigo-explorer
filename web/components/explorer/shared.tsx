@@ -20,8 +20,22 @@ import {
   formatInt,
   formatQuantaExact,
 } from '@/lib/amount';
-import { truncateMiddle } from '@/lib/route';
-import { Alert, Button, Card, CardContent, Skeleton, Tooltip } from '@/components/ui/primitives';
+import { routes, truncateMiddle } from '@/lib/route';
+import { formatRelativeTime, formatUtcTimestamp } from '@/lib/time';
+import {
+  Alert,
+  Button,
+  Card,
+  CardContent,
+  Skeleton,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Tooltip,
+} from '@/components/ui/primitives';
 import { cn } from '@/lib/utils';
 
 /**
@@ -508,6 +522,109 @@ export function RecentBlocksCharts({ blocks }: { blocks: BlockRow[] }) {
         </CardContent>
       </Card>
     </div>
+  );
+}
+
+/**
+ * Daftar blok (dasbor dan halaman blok). Layar sempit (< 640 px, HP, Q182): satu kartu per blok (tinggi, konfirmasi,
+ * block_id dipendekkan, waktu relatif, jumlah tx, ukuran) tanpa geser ke samping. Layar lebar: tabel enam kolom.
+ */
+export function BlockRowsView({
+  blocks,
+  nowUnix,
+  startChars = 10,
+  endChars = 8,
+}: {
+  blocks: BlockRow[];
+  nowUnix: number;
+  startChars?: number;
+  endChars?: number;
+}) {
+  const { lang, t } = useApp();
+  return (
+    <>
+      <ul className="sm:hidden divide-y divide-slate-100 dark:divide-slate-800/70">
+        {blocks.map((b) => (
+          <li key={b.block_id} className="px-4 py-3 space-y-1.5">
+            <div className="flex items-center justify-between gap-3">
+              <Link
+                href={routes.block(b.height)}
+                className="font-mono text-sm font-semibold tabular-nums text-teal-700 dark:text-teal-400 hover:underline"
+              >
+                #{formatInt(b.height, lang)}
+              </Link>
+              <ConfirmationsBadge confirmations={b.confirmations} />
+            </div>
+            <HashValue
+              value={b.block_id}
+              href={routes.block(b.block_id)}
+              startChars={8}
+              endChars={6}
+              label="block_id"
+            />
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-xs text-slate-500 dark:text-slate-400">
+              <span>{formatRelativeTime(b.timestamp, nowUnix, lang)}</span>
+              <span className="font-mono tabular-nums">{formatInt(b.tx_count, lang)} tx</span>
+              <span className="font-mono tabular-nums">{formatInt(b.size, lang)} B</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div className="hidden sm:block">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t('colHeight')}</TableHead>
+              <TableHead>{t('colBlockId')}</TableHead>
+              <TableHead>{t('colTime')}</TableHead>
+              <TableHead className="text-right">{t('colTxs')}</TableHead>
+              <TableHead className="text-right">{t('colSize')}</TableHead>
+              <TableHead className="text-right">{t('colStatus')}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {blocks.map((b) => (
+              <TableRow key={b.block_id}>
+                <TableCell className="font-mono font-semibold tabular-nums">
+                  <Link
+                    href={routes.block(b.height)}
+                    className="text-teal-700 dark:text-teal-400 hover:underline"
+                  >
+                    #{formatInt(b.height, lang)}
+                  </Link>
+                </TableCell>
+                <TableCell>
+                  <HashValue
+                    value={b.block_id}
+                    href={routes.block(b.block_id)}
+                    startChars={startChars}
+                    endChars={endChars}
+                    label="block_id"
+                  />
+                </TableCell>
+                <TableCell className="whitespace-nowrap">
+                  <div className="font-mono text-xs tabular-nums text-slate-800 dark:text-slate-200">
+                    {formatUtcTimestamp(b.timestamp)}
+                  </div>
+                  <div className="text-[11px] text-slate-500 dark:text-slate-400">
+                    {formatRelativeTime(b.timestamp, nowUnix, lang)}
+                  </div>
+                </TableCell>
+                <TableCell className="text-right font-mono tabular-nums">
+                  {formatInt(b.tx_count, lang)}
+                </TableCell>
+                <TableCell className="text-right font-mono tabular-nums">
+                  {formatInt(b.size, lang)}
+                </TableCell>
+                <TableCell className="text-right">
+                  <ConfirmationsBadge confirmations={b.confirmations} />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    </>
   );
 }
 

@@ -9,7 +9,6 @@ import { usePoll } from '@/hooks/use-poll';
 import { fetchBlocks } from '@/lib/api';
 import { formatInt } from '@/lib/amount';
 import { isValidHeight, routes } from '@/lib/route';
-import { formatRelativeTime, formatUtcTimestamp } from '@/lib/time';
 import {
   Alert,
   Button,
@@ -17,17 +16,10 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
 } from '@/components/ui/primitives';
 import {
   ApiStateView,
-  ConfirmationsBadge,
-  HashValue,
+  BlockRowsView,
   TableSkeleton,
 } from '@/components/explorer/shared';
 
@@ -141,58 +133,7 @@ function BlocksListContent() {
             {t('emptyBlocksList')}
           </div>
         ) : (
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>{t('colHeight')}</TableHead>
-                <TableHead>{t('colBlockId')}</TableHead>
-                <TableHead>{t('colTime')}</TableHead>
-                <TableHead className="text-right">{t('colTxs')}</TableHead>
-                <TableHead className="text-right">{t('colSize')}</TableHead>
-                <TableHead className="text-right">{t('colStatus')}</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {blocks.map((b) => (
-                <TableRow key={b.block_id}>
-                  <TableCell className="font-mono font-semibold tabular-nums">
-                    <Link
-                      href={routes.block(b.height)}
-                      className="text-teal-700 dark:text-teal-400 hover:underline"
-                    >
-                      #{formatInt(b.height, lang)}
-                    </Link>
-                  </TableCell>
-                  <TableCell>
-                    <HashValue
-                      value={b.block_id}
-                      href={routes.block(b.block_id)}
-                      startChars={12}
-                      endChars={10}
-                      label="block_id"
-                    />
-                  </TableCell>
-                  <TableCell className="whitespace-nowrap">
-                    <div className="font-mono text-xs tabular-nums">
-                      {formatUtcTimestamp(b.timestamp)}
-                    </div>
-                    <div className="text-[11px] text-slate-500 dark:text-slate-400">
-                      {formatRelativeTime(b.timestamp, nowUnix, lang)}
-                    </div>
-                  </TableCell>
-                  <TableCell className="text-right font-mono tabular-nums">
-                    {formatInt(b.tx_count, lang)}
-                  </TableCell>
-                  <TableCell className="text-right font-mono tabular-nums">
-                    {formatInt(b.size, lang)}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <ConfirmationsBadge confirmations={b.confirmations} />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <BlockRowsView blocks={blocks} nowUnix={nowUnix} startChars={12} endChars={10} />
         )}
       </Card>
     </div>
