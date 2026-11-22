@@ -62,7 +62,7 @@ describe('faucet requests', () => {
     expect(result).toEqual({ ok: true, data: payout });
     expect(calls).toHaveLength(1);
     expect(calls[0].url).toBe(FAUCET_URL);
-    expect(FAUCET_URL).toBe('https://zevrigo-faucet.ratuaurion.store/api/v1/faucet');
+    expect(FAUCET_URL).toBe('https://demo-faucet.zevrigo.online/api/v1/faucet');
     expect(calls[0].init?.method).toBe('POST');
     expect(calls[0].init?.body).toBe(JSON.stringify({ address: POCKET }));
     expect(calls[0].init?.credentials).toBe('omit');

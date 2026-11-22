@@ -12,9 +12,10 @@ export const API_BASE_PATH = '/api/v1';
 export const POLL_INTERVAL_MS = 10_000;
 
 /**
- * Layanan faucet jaringan demo regtest (TSK-M54) yang dipanggil halaman `/faucet/`. Bawaan: faucet publik demo. Build lain
+ * Layanan faucet jaringan demo regtest (TSK-M54) yang dipanggil halaman `/faucet/`. Bawaan: faucet publik demo
+ * `demo-faucet.zevrigo.online` (Q187, domain zevrigo.online; layanan yang sama juga menjawab di host lama). Build lain
  * boleh menggantinya lewat `NEXT_PUBLIC_FAUCET_URL`; nilai kosong berarti halaman faucet menyatakan faucet tidak tersedia.
  * Program explorer harus dijalankan dengan `--faucet-origin` origin yang sama agar peramban mengizinkan panggilan ini.
  */
 export const FAUCET_URL =
-  process.env.NEXT_PUBLIC_FAUCET_URL ?? 'https://zevrigo-faucet.ratuaurion.store/api/v1/faucet';
+  process.env.NEXT_PUBLIC_FAUCET_URL ?? 'https://demo-faucet.zevrigo.online/api/v1/faucet';
