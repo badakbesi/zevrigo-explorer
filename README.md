@@ -22,7 +22,8 @@ inti ([SUMBER_RESMI.md](https://github.com/badakbesi/zevrigo/blob/main/SUMBER_RE
 
 ## Aplikasi Zevrigo Explorer (Windows dan Android)
 
-`app/` berisi aplikasi Tauri 2 yang membuka explorer publik https://zevrigo.ratuaurion.store di jendelanya sendiri (TSK-M69):
+`app/` berisi aplikasi Tauri 2 yang membuka explorer publik https://demo-explorer.zevrigo.online di jendelanya sendiri (TSK-M69;
+sejak 0.1.1, DEC-42):
 tanpa perintah IPC, hanya halaman di origin explorer yang dibuka. Workspace Cargo sendiri (`app/src-tauri/Cargo.lock`), jadi
 program explorer, Docker, dan CI di atas tidak berubah. `make app-check` (Linux butuh WebKitGTK 4.1 seperti wallet). Installer
 Windows: workflow `Rilis aplikasi explorer` (tag `explorer-app-v<versi>`). APK Android: skrip langkah pencipta di zevrigo_lab (`app/package.json` hanya skrip `tauri` ke Tauri CLI repo

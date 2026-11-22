@@ -10,11 +10,11 @@
 
 #![forbid(unsafe_code)]
 
-/// Host explorer publik demo regtest (`SUMBER_RESMI.md` repo inti).
-pub const EXPLORER_HOST: &str = "zevrigo.ratuaurion.store";
+/// Host explorer publik demo regtest (`SUMBER_RESMI.md` repo inti; sejak 0.1.1 domain resmi `zevrigo.online`, DEC-42).
+pub const EXPLORER_HOST: &str = "demo-explorer.zevrigo.online";
 
 /// Halaman awal jendela, sama dengan `app.windows[0].url` di `tauri.conf.json`.
-pub const EXPLORER_URL: &str = "https://zevrigo.ratuaurion.store/";
+pub const EXPLORER_URL: &str = "https://demo-explorer.zevrigo.online/";
 
 /// Apakah jendela boleh membuka `url`: hanya `https` ke [`EXPLORER_HOST`] di port bawaan, tanpa nama pengguna atau password
 /// di tautan. Navigasi lain (situs lain, `http`, skema lain) ditolak dan jendela tetap di halaman sekarang.
@@ -74,22 +74,22 @@ mod tests {
     fn only_https_explorer_origin_is_allowed() {
         for ok in [
             EXPLORER_URL,
-            "https://zevrigo.ratuaurion.store/tx/?id=abab",
-            "https://zevrigo.ratuaurion.store:443/faucet/",
-            "https://ZEVRIGO.ratuaurion.store/block/?h=1",
+            "https://demo-explorer.zevrigo.online/tx/?id=abab",
+            "https://demo-explorer.zevrigo.online:443/faucet/",
+            "https://DEMO-EXPLORER.zevrigo.online/block/?h=1",
         ] {
             assert!(allowed(ok), "{ok}");
         }
         for bad in [
-            "http://zevrigo.ratuaurion.store/",
-            "https://zevrigo.ratuaurion.store:8443/",
-            "https://zevrigo-faucet.ratuaurion.store/api/v1/faucet",
-            "https://zevrigo-blog.ratuaurion.store/",
-            "https://ratuaurion.store/",
-            "https://zevrigo.ratuaurion.store.example.com/",
-            "https://example.com/zevrigo.ratuaurion.store",
-            "https://user@zevrigo.ratuaurion.store/",
-            "https://user:rahasia@zevrigo.ratuaurion.store/",
+            "http://demo-explorer.zevrigo.online/",
+            "https://demo-explorer.zevrigo.online:8443/",
+            "https://demo-faucet.zevrigo.online/api/v1/faucet",
+            "https://zevrigo.online/",
+            "https://zevrigo.ratuaurion.store/",
+            "https://demo-explorer.zevrigo.online.example.com/",
+            "https://example.com/demo-explorer.zevrigo.online",
+            "https://user@demo-explorer.zevrigo.online/",
+            "https://user:rahasia@demo-explorer.zevrigo.online/",
             "file:///etc/passwd",
             "javascript:alert(1)",
             "data:text/html,halo",

@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Zevrigo Explorer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "identifier": "com.zevrigo.explorer",
   "build": {
     "frontendDist": "../dist"
@@ -11,7 +11,7 @@
       {
         "label": "main",
         "title": "Zevrigo Explorer",
-        "url": "https://zevrigo.ratuaurion.store/",
+        "url": "https://demo-explorer.zevrigo.online/",
         "create": false,
         "width": 1280,
         "height": 860,

@@ -1,5 +1,6 @@
 Aplikasi Zevrigo Explorer {{VERSI}} untuk Windows (x64), dibangun GitHub Actions dari tag `{{TAG}}` (commit `{{COMMIT}}`)
-dengan Cargo.lock tetap. Aplikasi membuka explorer resmi https://zevrigo.ratuaurion.store di jendelanya sendiri.
+dengan Cargo.lock tetap. Aplikasi membuka explorer resmi https://demo-explorer.zevrigo.online di jendelanya sendiri
+(domain resmi `zevrigo.online` sejak 0.1.1, DEC-42).
 
 **Jaringan demo regtest untuk belajar.** Koin demo tidak bernilai, tidak bisa dijual, dan bisa hilang saat jaringan
 di-reset. Ini bukan penawaran investasi.
