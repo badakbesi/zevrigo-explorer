@@ -6,7 +6,7 @@
 ## Isi
 | Hal | Keputusan |
 |---|---|
-| Bentuk | Jendela Tauri 2 ke explorer publik `https://zevrigo.ratuaurion.store/` (cara A): tampilan selalu sama dengan web, server tidak berubah |
+| Bentuk | Jendela Tauri 2 ke explorer publik `https://demo-explorer.zevrigo.online/` (cara A): tampilan selalu sama dengan web, server tidak berubah |
 | Kode | `app/src-tauri`: jendela dari `tauri.conf.json` (`create: false`) dibuat di `setup` dengan `on_navigation(allowed_url)`: hanya `https` ke host explorer, port bawaan, tanpa nama pengguna. Tanpa perintah IPC dan tanpa capabilities |
 | Dependensi | `tauri =2.12.3`, `tauri-build =2.7.2` (versi wallet MOD-15), tanpa plugin. Workspace dan `Cargo.lock` sendiri; semua paket sama persis dengan Cargo.lock wallet |
 | Identitas | `com.zevrigo.explorer`, "Zevrigo Explorer", versi 0.1.0 (Android versionCode 1000), ikon logo resmi (salinan ikon wallet, DEC-40) |

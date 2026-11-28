@@ -85,7 +85,6 @@ mod tests {
             "https://demo-explorer.zevrigo.online:8443/",
             "https://demo-faucet.zevrigo.online/api/v1/faucet",
             "https://zevrigo.online/",
-            "https://zevrigo.ratuaurion.store/",
             "https://demo-explorer.zevrigo.online.example.com/",
             "https://example.com/demo-explorer.zevrigo.online",
             "https://user@demo-explorer.zevrigo.online/",

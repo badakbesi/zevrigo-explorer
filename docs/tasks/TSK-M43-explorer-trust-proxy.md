@@ -5,7 +5,7 @@
 
 ## Tujuan
 Pencipta memutuskan (9 November 2026) membuka explorer dan seed node ke publik untuk sementara dari PC lewat Cloudflare
-Tunnel dengan domain `ratuaurion.store`, sebelum pindah ke VPS. Lewat tunnel, semua pengunjung tersambung ke explorer dari
+Tunnel dengan domain `zevrigo.online`, sebelum pindah ke VPS. Lewat tunnel, semua pengunjung tersambung ke explorer dari
 `cloudflared` di loopback, sehingga batas laju per klien TSK-M40 menjadi satu ember untuk seluruh dunia. Opsi
 `--trust-proxy` mengembalikan batas per pengunjung tanpa paket baru dan tanpa menyimpan alamat IP.
 

@@ -13,7 +13,7 @@ export const POLL_INTERVAL_MS = 10_000;
 
 /**
  * Layanan faucet jaringan demo regtest (TSK-M54) yang dipanggil halaman `/faucet/`. Bawaan: faucet publik demo
- * `demo-faucet.zevrigo.online` (Q187, domain zevrigo.online; layanan yang sama juga menjawab di host lama). Build lain
+ * `demo-faucet.zevrigo.online` (Q187, domain zevrigo.online). Build lain
  * boleh menggantinya lewat `NEXT_PUBLIC_FAUCET_URL`; nilai kosong berarti halaman faucet menyatakan faucet tidak tersedia.
  * Program explorer harus dijalankan dengan `--faucet-origin` origin yang sama agar peramban mengizinkan panggilan ini.
  */
